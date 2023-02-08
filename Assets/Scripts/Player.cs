@@ -7,37 +7,76 @@ public class Player : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
     private PlayerInput playerInput;
+    private PlayerAnimator playerAnimator;
 
-    private Vector3 direction;
     private bool isMoving = true;
     float speed = 5f;
     float timeToIncreaseSpeed = 5f;
     float elapsedTime = 0f;
+    bool isJumping = false;
+    bool isCollision = false;
+    private LayerMask itemLayer;
+    private void Start()
+    {
+        itemLayer = LayerMask.GetMask("Barrier");
+    }
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-
         PlayerInputActions playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.OnJump.performed += OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed += OnMoveRight_performed;
+        playerInputActions.Player.OnJump.canceled += OnJump_canceled;
 
 
     }
+
+    private void OnJump_canceled(InputAction.CallbackContext obj)
+    {
+        isJumping = false;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Barrier")
+        {
+            Debug.Log("eee");
+        }
+    }
+
+
+
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= timeToIncreaseSpeed)
+        Vector3 direction = transform.TransformDirection(Vector3.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, direction, .35f, itemLayer))
         {
-            speed += 1f;
-            elapsedTime = 0f;
+            Debug.Log("Wykryto przedmiot: ");
+            transform.position = Vector3.zero;
+
         }
-        if (isMoving)
+        else
         {
-            transform.position += Vector3.forward * speed * Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= timeToIncreaseSpeed)
+            {
+                speed += 0.1f;
+                elapsedTime = 0f;
+            }
+            if (isMoving)
+            {
+                transform.position += Vector3.forward * speed * Time.deltaTime;
+            }
         }
+        //if (playerRigidbody.position.y < 0.2)
+        //{
+        //    isJumping = false;
+        //}
+
         //if (isMoving)
         //{
         //    transform.position += Vector3.forward * Time.deltaTime;
@@ -65,11 +104,18 @@ public class Player : MonoBehaviour
 
     private void OnJump_performed(InputAction.CallbackContext obj)
     {
-        if (transform.position.y<1)
+        if (transform.position.y < 1)
         {
             playerRigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            isJumping = true;
+
         }
 
-       
+
+    }
+    public bool IsJumping()
+    {
+        return isJumping;
+
     }
 }
