@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     bool isJumping = false;
     bool isCollision = false;
     private LayerMask itemLayer;
+    private LayerMask itemLayer1;
     private void Start()
     {
         itemLayer = LayerMask.GetMask("Barrier");
+        itemLayer1 = LayerMask.GetMask("Coin");
     }
     void Awake()
     {
@@ -70,6 +72,13 @@ public class Player : MonoBehaviour
             {
                 transform.position += Vector3.forward * speed * Time.deltaTime;
             }
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction,out hit, 5f, itemLayer1))
+        {
+            Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
+            CoinsCounter.Instance.IncreaseCoinsAmount();
+            hit.collider.gameObject.SetActive(false);
         }
         //if (playerRigidbody.position.y < 0.2)
         //{
