@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private bool isMoving = true;
     float speed = 5f;
-    float timeToIncreaseSpeed = 5f;
+    float timeToIncreaseSpeed = 1f;
     float elapsedTime = 0f;
     bool isJumping = false;
     bool isCollision = false;
@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Vector3 direction = transform.TransformDirection(Vector3.forward);
-        RaycastHit hit;
 
         if (Physics.Raycast(transform.position, direction, .35f, itemLayer))
         {
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
             elapsedTime += Time.deltaTime;
             if (elapsedTime >= timeToIncreaseSpeed)
             {
-                speed += 0.1f;
+                speed += 1f;
                 elapsedTime = 0f;
             }
             if (isMoving)
