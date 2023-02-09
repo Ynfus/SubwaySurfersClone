@@ -16,4 +16,8 @@ public class CoinsCounter : MonoBehaviour
         coins++;
         Debug.Log(coins);
     }
+    public int GetCoinsAmount()
+    {
+        return coins;
+    }
 }

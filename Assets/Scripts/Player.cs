@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     {
         Vector3 direction = transform.TransformDirection(Vector3.forward);
 
-        if (Physics.Raycast(transform.position, direction, .35f, itemLayer))
+        if (Physics.Raycast(transform.position, direction, .5f, itemLayer))
         {
             Debug.Log("Wykryto przedmiot: ");
             transform.position = Vector3.zero;
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             }
         }
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction,out hit, 5f, itemLayer1))
+        if (Physics.Raycast(transform.position, direction,out hit, .5f, itemLayer1))
         {
             Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
             CoinsCounter.Instance.IncreaseCoinsAmount();

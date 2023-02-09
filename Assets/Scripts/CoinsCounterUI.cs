@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DistanceCounter : MonoBehaviour
+public class CoinsCounterUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] Player player;
-    private Vector3 startingPosition;
-    private float distance;
+    [SerializeField] TextMeshProUGUI coinsAmountText;
+    private int coinsAmount=0;
 
-    private void Start()
-    {
-        startingPosition = player.transform.position;
-    }
 
     private void Update()
     {
-        distance = Vector3.Distance(startingPosition, player.transform.position);
-        scoreText.text = distance.ToString("F0");
+        coinsAmount = CoinsCounter.Instance.GetCoinsAmount();
+        coinsAmountText.text =coinsAmount.ToString("F0");
         // wyœwietl wartoœæ dystansu na ekranie
     }
 }
