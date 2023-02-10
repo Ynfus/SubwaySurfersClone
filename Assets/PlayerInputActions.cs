@@ -38,7 +38,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""OnMoveRight"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""0bc9528b-de02-406a-9ec9-bc444b6a31ae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -47,12 +47,30 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""OnMoveLeft"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""80f7b11a-fa36-4390-8924-135733cf3182"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b4c81f7-1dc4-45b2-92ec-7f468501dca9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""776f184c-2959-4175-a407-28863efb18b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +106,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""OnMoveLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fe4b92e-f915-4656-a859-901e6350cb2c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad689ea6-13f8-427b-971f-f0af74945162"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +139,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_OnJump = m_Player.FindAction("OnJump", throwIfNotFound: true);
         m_Player_OnMoveRight = m_Player.FindAction("OnMoveRight", throwIfNotFound: true);
         m_Player_OnMoveLeft = m_Player.FindAction("OnMoveLeft", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +203,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_OnJump;
     private readonly InputAction m_Player_OnMoveRight;
     private readonly InputAction m_Player_OnMoveLeft;
+    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -168,6 +212,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @OnJump => m_Wrapper.m_Player_OnJump;
         public InputAction @OnMoveRight => m_Wrapper.m_Player_OnMoveRight;
         public InputAction @OnMoveLeft => m_Wrapper.m_Player_OnMoveLeft;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +232,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @OnMoveLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnMoveLeft;
                 @OnMoveLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnMoveLeft;
                 @OnMoveLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnMoveLeft;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +251,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @OnMoveLeft.started += instance.OnOnMoveLeft;
                 @OnMoveLeft.performed += instance.OnOnMoveLeft;
                 @OnMoveLeft.canceled += instance.OnOnMoveLeft;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -208,5 +266,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnOnJump(InputAction.CallbackContext context);
         void OnOnMoveRight(InputAction.CallbackContext context);
         void OnOnMoveLeft(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

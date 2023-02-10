@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     float timeToIncreaseSpeed = 1f;
     float elapsedTime = 0f;
     bool isJumping = false;
-    bool isCollision = false;
     private LayerMask itemLayer;
     private LayerMask itemLayer1;
     private void Start()
@@ -52,34 +51,40 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Vector3 direction = transform.TransformDirection(Vector3.forward);
+        if (SubwaySurfersGameManager.Instance.IsGamePlaying())
+        {
+            Vector3 direction = transform.TransformDirection(Vector3.forward);
 
-        if (Physics.Raycast(transform.position, direction, .5f, itemLayer))
-        {
-            Debug.Log("Wykryto przedmiot: ");
-            transform.position = Vector3.zero;
+            if (Physics.Raycast(transform.position, direction, 2f, itemLayer))
+            {
+                Debug.Log("Wykryto przedmiot: ");
+                playerRigidbody.velocity = Vector3.zero;
 
-        }
-        else
-        {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime >= timeToIncreaseSpeed)
-            {
-                speed += 1f;
-                elapsedTime = 0f;
             }
-            if (isMoving)
+            else
             {
-                transform.position += Vector3.forward * speed * Time.deltaTime;
+                elapsedTime += Time.deltaTime;
+                if (elapsedTime >= timeToIncreaseSpeed)
+                {
+                    speed += 1f;
+                    elapsedTime = 0f;
+                }
+                if (isMoving)
+                {
+                    transform.position += Vector3.forward * speed * Time.deltaTime;
+                }
+            }
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, direction, out hit, .5f, itemLayer1))
+            {
+                Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
+                CoinsCounter.Instance.IncreaseCoinsAmount();
+                hit.collider.gameObject.SetActive(false);
             }
         }
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction,out hit, .5f, itemLayer1))
-        {
-            Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
-            CoinsCounter.Instance.IncreaseCoinsAmount();
-            hit.collider.gameObject.SetActive(false);
-        }
+
+
+        
         //if (playerRigidbody.position.y < 0.2)
         //{
         //    isJumping = false;
