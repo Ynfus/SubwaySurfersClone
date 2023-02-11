@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     float timeToIncreaseSpeed = 1f;
     float elapsedTime = 0f;
     bool isJumping = false;
+    private bool isCollision = false;
     private LayerMask itemLayer;
     private LayerMask itemLayer1;
     private void Start()
@@ -58,8 +59,7 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(transform.position, direction, 2f, itemLayer))
             {
                 Debug.Log("Wykryto przedmiot: ");
-                playerRigidbody.velocity = Vector3.zero;
-
+                isCollision = true;
             }
             else
             {
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         }
 
 
-        
+
         //if (playerRigidbody.position.y < 0.2)
         //{
         //    isJumping = false;
@@ -126,6 +126,11 @@ public class Player : MonoBehaviour
 
 
     }
+    public bool IsCollision()
+    {
+        return isCollision;
+    }
+
     public bool IsJumping()
     {
         return isJumping;

@@ -8,7 +8,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
 {
 
     public static SubwaySurfersGameManager Instance { get; private set; }
-
+    [SerializeField] private Player player;
     public event EventHandler OnStateChanged;
     public event EventHandler OnGameUnpaused;
     public event EventHandler OnGamePaused;
@@ -94,9 +94,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
                 }
                 break;
             case State.GamePlaying:
-                gamePlayingTimer -= Time.deltaTime;
-                Debug.Log("111");
-                if (gamePlayingTimer < 0f)
+                if (player.IsCollision())
                 {
                     state = State.GameOver;
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
