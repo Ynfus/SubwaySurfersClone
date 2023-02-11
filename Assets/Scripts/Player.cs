@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     float elapsedTime = 0f;
     bool isJumping = false;
     private bool isCollision = false;
+    private bool isResizing = false;
     private LayerMask itemLayer;
     private LayerMask itemLayer1;
     private void Start()
@@ -32,14 +33,16 @@ public class Player : MonoBehaviour
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed += OnMoveRight_performed;
         playerInputActions.Player.OnJump.canceled += OnJump_canceled;
-
+        playerInputActions.Player.OnResizing.performed += OnResizing_performed;
+        playerInputActions.Player.OnResizing.canceled += OnResizing_canceled;
 
     }
 
-    private void OnJump_canceled(InputAction.CallbackContext obj)
+    private void OnResizing_canceled(InputAction.CallbackContext obj)
     {
-        isJumping = false;
+        isResizing = false;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Barrier")
@@ -126,6 +129,16 @@ public class Player : MonoBehaviour
 
 
     }
+
+    private void OnJump_canceled(InputAction.CallbackContext obj)
+    {
+        isJumping = false;
+    }
+
+    private void OnResizing_performed(InputAction.CallbackContext obj)
+    {
+        isResizing = true;
+    }
     public bool IsCollision()
     {
         return isCollision;
@@ -135,5 +148,9 @@ public class Player : MonoBehaviour
     {
         return isJumping;
 
+    }
+    public bool IsResizing()
+    {
+        return isResizing;
     }
 }
