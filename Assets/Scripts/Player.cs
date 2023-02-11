@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Rigidbody playerRigidbody;
     private PlayerInput playerInput;
     private PlayerAnimator playerAnimator;
+    public SpawnManager spawnManager;
 
     private bool isMoving = true;
     float speed = 5f;
@@ -49,6 +50,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log("eee");
         }
+        if (other.tag=="SpawnTrigger")
+        {
+                spawnManager.SpawnTriggerEntered(); 
+        }
     }
 
 
@@ -69,7 +74,7 @@ public class Player : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 if (elapsedTime >= timeToIncreaseSpeed)
                 {
-                    speed += 1f;
+                    speed += .1f;
                     elapsedTime = 0f;
                 }
                 if (isMoving)
@@ -143,7 +148,6 @@ public class Player : MonoBehaviour
     {
         return isCollision;
     }
-
     public bool IsJumping()
     {
         return isJumping;
