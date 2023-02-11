@@ -26,7 +26,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
         GameOver
     }
     private State state;
-    private float countdownTimer = 30f;
+    private float countdownTimer = 3f;
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 100f;
     private bool isGamePaused = false;
@@ -109,6 +109,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
     }
     public bool IsGamePlaying()
     {
+
         return state == State.GamePlaying;
     }
     public bool IsCountdownToStartActive()
