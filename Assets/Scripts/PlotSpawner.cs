@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlotSpawner : MonoBehaviour
 {
     private int initAmount = 5;
-    private float plotSize = 200f;
-    private float xPosLeft = -22f;
-    private float xPosRight = 22f;
+    private float plotSize = 40f;
+    private float xPosLeft = -64f;
+    private float xPosRight = 64f;
     private float lastZPos = 14f;
     public List<GameObject> plots;
     // Start is called before the first frame update

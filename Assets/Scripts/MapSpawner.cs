@@ -5,26 +5,30 @@ using UnityEngine;
 
 public class MapSpawner : MonoBehaviour
 {
+    private int initAmount = 1;
+    private float roadSize = 200f;
+    private float lastZPos = 100f;
     public List<GameObject> roads;
-    private float offset = 10f;
     // Start is called before the first frame update
     void Start()
     {
-        if (roads != null && roads.Count > 0)
+        for (int i = 0; i < initAmount; i++)
         {
-            roads = roads.OrderBy(r => r.transform.position.z).ToList();
+            SpawnRoad();
         }
     }
 
     // Update is called once per frame
-    public void MoveRoad()
+    void Update()
     {
-        GameObject movedRoad = roads[0];
-        roads.Remove(movedRoad);
-        float newZ = roads[roads.Count - 1].transform.position.z + offset;
-        movedRoad.transform.position = new Vector3(0, 0, newZ);
-        roads.Add(movedRoad);
 
+    }
+    public void SpawnRoad()
+    {
+        GameObject road = roads[Random.Range(0, roads.Count)];
+        float zPos = lastZPos + roadSize;
+        Instantiate(road, new Vector3(0, 0, zPos), road.transform.rotation);
+        lastZPos += roadSize;
 
     }
 }
