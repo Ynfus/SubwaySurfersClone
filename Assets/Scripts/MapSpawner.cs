@@ -25,6 +25,7 @@ public class MapSpawner : MonoBehaviour
     }
     public void SpawnRoad()
     {
+
         GameObject road = roads[Random.Range(0, roads.Count)];
         float zPos = lastZPos + roadSize;
         Instantiate(road, new Vector3(0, 0, zPos), road.transform.rotation);
