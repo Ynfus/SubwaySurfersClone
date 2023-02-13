@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnTriggerEntered()
     {
         Debug.Log("Spawned");
-        mapSpawner.MoveRoad();
+        mapSpawner.SpawnRoad();
         plotSpawner.SpawnPlot();
     }
 }
