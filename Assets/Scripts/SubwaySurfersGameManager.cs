@@ -50,6 +50,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
         {
             state = State.CountdownToStart;
             OnStateChanged?.Invoke(this, new EventArgs());
+            SoundManager.Instance.PlayCountdownSound();
         }
     }
 

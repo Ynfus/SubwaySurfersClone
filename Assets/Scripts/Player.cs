@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(transform.position, direction, out hit, .5f, itemLayer1))
             {
                 Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
+                SoundManager.Instance.PlayCoinSound();
                 CoinsCounter.Instance.IncreaseCoinsAmount();
                 hit.collider.gameObject.SetActive(false);
             }
