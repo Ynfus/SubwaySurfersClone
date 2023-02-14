@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClip countdownAudioClip;
     [SerializeField] private AudioClip coinAudioClip;
+    [SerializeField] private AudioClip deathAudioClip;
     private AudioSource audioSource;
 
     private float volume = 1.0f;
@@ -35,6 +36,12 @@ public class SoundManager : MonoBehaviour
     public void PlayCoinSound()
     {
         audioSource.clip= coinAudioClip;
+        audioSource.Play();
+        
+    } 
+    public void PlayDeathSound()
+    {
+        audioSource.clip= deathAudioClip;
         audioSource.Play();
         
     }
