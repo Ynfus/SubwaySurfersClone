@@ -20,4 +20,8 @@ public class CoinsCounter : MonoBehaviour
     {
         return coins;
     }
+    public void ResetCoins()
+    { 
+        coins= 0;
+    }
 }

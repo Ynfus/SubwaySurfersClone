@@ -13,6 +13,5 @@ public class CoinsCounterUI : MonoBehaviour
     {
         coinsAmount = CoinsCounter.Instance.GetCoinsAmount();
         coinsAmountText.text =coinsAmount.ToString("F0");
-        // wyœwietl wartoœæ dystansu na ekranie
     }
 }
