@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerAnimator playerAnimator;
     public SpawnManager spawnManager;
+    private PlayerInputActions playerInputActions;
 
     private bool isMoving = true;
     float speed = 5f;
@@ -24,11 +25,11 @@ public class Player : MonoBehaviour
         itemLayer = LayerMask.GetMask("Barrier");
         itemLayer1 = LayerMask.GetMask("Coin");
     }
-    void Awake()
+    private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-        PlayerInputActions playerInputActions = new PlayerInputActions();
+        playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         playerInputActions.Player.OnJump.performed += OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
@@ -37,6 +38,16 @@ public class Player : MonoBehaviour
         playerInputActions.Player.OnResizing.performed += OnResizing_performed;
         playerInputActions.Player.OnResizing.canceled += OnResizing_canceled;
 
+    }
+    private void OnDestroy()
+    {
+        playerInputActions.Player.OnJump.performed -= OnJump_performed;
+        playerInputActions.Player.OnMoveLeft.performed -= OnMoveLeft_performed;
+        playerInputActions.Player.OnMoveRight.performed -= OnMoveRight_performed;
+        playerInputActions.Player.OnJump.canceled -= OnJump_canceled;
+        playerInputActions.Player.OnResizing.performed -= OnResizing_performed;
+        playerInputActions.Player.OnResizing.canceled -= OnResizing_canceled;
+        playerInputActions.Dispose();
     }
 
     private void OnResizing_canceled(InputAction.CallbackContext obj)
@@ -157,5 +168,9 @@ public class Player : MonoBehaviour
     public bool IsResizing()
     {
         return isResizing;
+    }
+    public void ResetPosition()
+    { 
+        transform.position = Vector3.zero;
     }
 }

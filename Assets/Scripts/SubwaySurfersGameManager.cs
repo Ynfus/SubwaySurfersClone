@@ -12,7 +12,10 @@ public class SubwaySurfersGameManager : MonoBehaviour
     public event EventHandler OnStateChanged;
     public event EventHandler OnGameUnpaused;
     public event EventHandler OnGamePaused;
-
+    //public static void ResetStaticData()
+    //{
+    //    OnAnyObjectPlaceHere = null;
+    //}
     private void Awake()
     {
         Instance = this;
@@ -34,6 +37,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
     private void Start()
     {
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        GameInput.Instance.OnPauseAction += SubwaySurfersGameManager_OnPauseAction;
         //if (state == State.WaitingToStart)
         //{
             
@@ -42,6 +46,8 @@ public class SubwaySurfersGameManager : MonoBehaviour
         //}
         //GameInput.Instance.OnPauseAction += SubwaySurfersGameManager_OnPauseAction;
     }
+
+
 
 
     private void GameInput_OnInteractAction(object sender, EventArgs e)
@@ -58,7 +64,15 @@ public class SubwaySurfersGameManager : MonoBehaviour
     {
         TogglePauseGame();
     }
+    public void Reset()
+    {
+        state = State.WaitingToStart;
+        player.ResetPosition();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+        DistanceCounter.Instance.ResetDistance();
+        CoinsCounter.Instance.ResetCoins();
 
+    }
     public void TogglePauseGame()
     {
         isGamePaused = !isGamePaused;
