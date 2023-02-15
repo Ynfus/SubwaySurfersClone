@@ -4,40 +4,57 @@ using UnityEngine;
 
 public class EnvironmentSpawner : MonoBehaviour
 {
+    public int initialAmount = 5;
+    public float plotSize = 40f;
+    public GameObject[] plotPrefabs;
+    public GameObject player;
+    public float despawnDistance = 100f;
 
-    [SerializeField] private GameObject prefab;  // Prefab obiektów, które bêd¹ przechowywane w puli.
-    [SerializeField] private int poolSize = 10;  // Pocz¹tkowy rozmiar puli.
+    private float lastZPos;
+    private List<GameObject> spawnedPlots;
 
-    private List<GameObject> pool;  // Lista przechowuj¹ca obiekty w puli.
-
-    // Metoda wywo³ywana przy starcie.
-    private void Start()
+    void Start()
     {
-        // Inicjalizacja puli.
-        pool = new List<GameObject>();
-        for (int i = 0; i < poolSize; i++)
+        lastZPos = plotSize * initialAmount;
+
+        // Spawn initial plots
+        spawnedPlots = new List<GameObject>();
+        for (int i = 0; i < initialAmount; i++)
         {
-            GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
-            obj.SetActive(false);
-            pool.Add(obj);
+            SpawnPlot();
         }
     }
 
-    // Metoda zwracaj¹ca obiekt z puli.
-    public GameObject GetObjectFromPool()
+    void Update()
     {
-        foreach (GameObject obj in pool)
+        // Check if any spawned plots are outside the despawn distance
+        for (int i = spawnedPlots.Count - 1; i >= 0; i--)
         {
-            if (!obj.activeInHierarchy)
+            GameObject plot = spawnedPlots[i];
+            if (plot.transform.position.z < player.transform.position.z - despawnDistance)
             {
-                obj.SetActive(true);
-                return obj;
+                // Move plot to the end
+                plot.transform.position += new Vector3(0, 0, plotSize * initialAmount);
+
+                // Remove plot from the beginning of the list and add it to the end
+                spawnedPlots.RemoveAt(i);
+                spawnedPlots.Add(plot);
             }
         }
+    }
 
-        // W przypadku braku wolnych obiektów w puli, utworzenie nowego.
-        GameObject newObj = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
-        pool.Add(newObj);
-        return newObj;
+    private void SpawnPlot()
+    {
+        // Spawn a random plot prefab
+        GameObject plot = Instantiate(plotPrefabs[Random.Range(0, plotPrefabs.Length)]);
+
+        // Set position to last z position
+        plot.transform.position = new Vector3(plot.transform.position.x, plot.transform.position.y, lastZPos);
+
+        // Update last z position
+        lastZPos += plotSize;
+
+        // Add plot to spawned plots list
+        spawnedPlots.Add(plot);
     }
 }
