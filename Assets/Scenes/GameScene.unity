@@ -1201,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &272150387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3620,6 +3620,7 @@ GameObject:
   - component: {fileID: 820220365}
   - component: {fileID: 820220364}
   - component: {fileID: 820220363}
+  - component: {fileID: 820220367}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -3648,7 +3649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820220362}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f809276cb4de854fa1edc64cc9bc492, type: 3}
   m_Name: 
@@ -3680,8 +3681,27 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &820220367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820220362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b606ceebc4c8c4bab584fdadfec944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialAmount: 8
+  plotSize: 40
+  xPosLeft: -64
+  xPosRight: 64
+  lastZPos: 14
+  plotPrefabs:
+  - {fileID: 4237245921800912546, guid: 204ea2aff993c694facb97078661f016, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -7357,7 +7377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RESUME
+  m_text: RETRY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8880,7 +8900,7 @@ PrefabInstance:
     - target: {fileID: 8073560712302879759, guid: 204ea2aff993c694facb97078661f016,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8073560712302879759, guid: 204ea2aff993c694facb97078661f016,
         type: 3}
