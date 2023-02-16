@@ -7,9 +7,15 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button shopButton;
     private void Awake()
     {
         playButton.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.GameScene);
+
+        });
+        shopButton.onClick.AddListener(() =>
         {
             Loader.Load(Loader.Scene.GameScene);
 

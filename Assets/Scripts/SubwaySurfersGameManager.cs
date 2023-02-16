@@ -33,6 +33,7 @@ public class SubwaySurfersGameManager : MonoBehaviour
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 100f;
     private bool isGamePaused = false;
+    private bool isSaved = false;
 
     private void Start()
     {
@@ -116,9 +117,19 @@ public class SubwaySurfersGameManager : MonoBehaviour
                 }
                 break;
             case State.GameOver:
+                if (!isSaved)
+                { SaveCoins(); }
                 break;
 
         }
+    }
+    private void SaveCoins()
+    {
+        int currentCoins = PlayerPrefs.GetInt("Coins", 0);
+        currentCoins += CoinsCounter.Instance.GetCoinsAmount();
+        PlayerPrefs.SetInt("Coins", currentCoins);
+        Debug.Log(currentCoins);
+        isSaved= true;
     }
     public bool IsGamePlaying()
     {
