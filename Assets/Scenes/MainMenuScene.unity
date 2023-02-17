@@ -2746,8 +2746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c164b00a11fa1e54d812770401237582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  astronautButton: {fileID: 1299741645}
+  homelessButton: {fileID: 648776238}
   astronautButtonText: {fileID: 948632124}
   homelessButtonText: {fileID: 290228579}
-  buyAstronautButton: {fileID: 1299741645}
-  buyHomelessButton: {fileID: 648776238}
   coinsAmount: {fileID: 178667400}

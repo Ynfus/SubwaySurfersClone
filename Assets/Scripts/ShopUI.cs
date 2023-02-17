@@ -7,117 +7,200 @@ using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
+    [SerializeField] Button astronautButton;
+    [SerializeField] Button homelessButton;
     [SerializeField] TextMeshProUGUI astronautButtonText;
     [SerializeField] TextMeshProUGUI homelessButtonText;
-    [SerializeField] Button buyAstronautButton;
-    [SerializeField] Button buyHomelessButton;
     [SerializeField] TextMeshProUGUI coinsAmount;
-    private string ownedSkinsString;
-    private string skinInUse;
-    private string[] ownedSkins;
+
     private const string ASTRONAUT = "astronaut";
     private const string HOMELESS = "homeless";
-    private const int ASTRONAUT_PRICE = 10;
-    private const int HOMELESS_PRICE = 20;
+    private const int ASTRONAUT_COST = 10;
+    private const int HOMELESS_COST = 20;
 
     private void Start()
-
     {
-        coinsAmount.text = PlayerPrefs.GetInt("Coins", 0).ToString();
-        UpdateButtons();
+        string skinInUse = PlayerPrefs.GetString("SkinInUse", ASTRONAUT); 
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", ""); 
+        string[] ownedSkins = ownedSkinsString.Split(',');
+        PlayerPrefs.DeleteKey("OwnedSkins");
+        Dictionary<string, TextMeshProUGUI> buttonMap = new Dictionary<string, TextMeshProUGUI>()
+        {
+            { ASTRONAUT, astronautButtonText },
+            { HOMELESS, homelessButtonText }
+        };
+
+        foreach (string skin in buttonMap.Keys)
+        {
+            if (ownedSkins.Contains(skin))
+            {
+                if (skin == skinInUse)
+                {
+                    buttonMap[skin].text = "In use";
+                }
+                else
+                {
+                    buttonMap[skin].text = "Choose";
+                }
+            }
+            else
+            {
+                buttonMap[skin].text = "Unlock";
+            }
+        }
+
+        astronautButton.onClick.AddListener(BuyAstronautSkin);
+        homelessButton.onClick.AddListener(BuyHomelessSkin);
+        astronautButtonText.transform.parent.GetComponent<Button>().onClick.AddListener(SelectAstronautSkin);
+        homelessButtonText.transform.parent.GetComponent<Button>().onClick.AddListener(SelectHomelessSkin);
     }
 
-    private void UpdateButtons()
+    private void Update()
     {
-        skinInUse = PlayerPrefs.GetString("SkinInUse");
-        ownedSkinsString = PlayerPrefs.GetString("OwnedSkins");
-        ownedSkins = ownedSkinsString.Split(',');
+        coinsAmount.text = PlayerPrefs.GetInt("Coins", 0).ToString();
+    }
+
+    private void BuyAstronautSkin()
+    {
+        int coins = PlayerPrefs.GetInt("Coins", 0);
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", "");
+        string[] ownedSkins = ownedSkinsString.Split(',');
+        if (!ownedSkins.Contains(ASTRONAUT))
+        {
+            if (coins >= 50)
+            {
+                coins -= 50;
+
+
+
+
+                ownedSkinsString = ownedSkinsString + ASTRONAUT + ",";
+                PlayerPrefs.SetString("OwnedSkins", ownedSkinsString);
+
+
+                PlayerPrefs.SetString("SkinInUse", ASTRONAUT);
+                PlayerPrefs.SetInt("Coins", coins);
+            }
+        }
+    }
+
+    private void BuyHomelessSkin()
+    {
+        int coins = PlayerPrefs.GetInt("Coins", 0);
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", "");
+        string[] ownedSkins = ownedSkinsString.Split(',');
+        if (!ownedSkins.Contains(HOMELESS))
+        {
+            if (coins >= 100)
+            {
+                coins -= 100;
+
+
+
+
+                ownedSkinsString = ownedSkinsString + HOMELESS + ",";
+                PlayerPrefs.SetString("OwnedSkins", ownedSkinsString);
+
+
+                PlayerPrefs.SetString("SkinInUse", HOMELESS);
+                PlayerPrefs.SetInt("Coins", coins);
+            }
+        }
+    }
+    public void SelectAstronautSkin()
+    {
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", ""); 
+        string[] ownedSkins = ownedSkinsString.Split(',');
 
         if (ownedSkins.Contains(ASTRONAUT))
         {
-            if (skinInUse == ASTRONAUT)
-            {
-                astronautButtonText.text = "In use";
-                buyAstronautButton.interactable = false;
-            }
-            else
-            {
-                astronautButtonText.text = "Choose";
-                buyAstronautButton.interactable = true;
-            }
+            PlayerPrefs.SetString("SkinInUse", ASTRONAUT);
+            UpdateSkinButtons(); 
         }
         else
         {
-            astronautButtonText.text = "Buy";
-            buyAstronautButton.interactable = true;
+            int coins = PlayerPrefs.GetInt("Coins", 0);
+            if (coins >= ASTRONAUT_COST)
+            {
+                coins -= ASTRONAUT_COST;
+                PlayerPrefs.SetInt("Coins", coins); 
+                ownedSkinsString += (ownedSkinsString == "" ? "" : ",") + ASTRONAUT; 
+                PlayerPrefs.SetString("OwnedSkins", ownedSkinsString);
+                PlayerPrefs.SetString("SkinInUse", ASTRONAUT);
+                UpdateSkinButtons(); 
+                coinsAmount.text = coins.ToString();
+            }
+            else
+            {
+                Debug.Log("Not enough coins to buy skin");
+            }
         }
+    }
+
+    public void SelectHomelessSkin()
+    {
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", "");
+        string[] ownedSkins = ownedSkinsString.Split(',');
 
         if (ownedSkins.Contains(HOMELESS))
         {
-            if (skinInUse == HOMELESS)
-            {
-                homelessButtonText.text = "In use";
-                buyHomelessButton.interactable = false;
-            }
-            else
-            {
-                homelessButtonText.text = "Choose";
-                buyHomelessButton.interactable = true;
-            }
+            PlayerPrefs.SetString("SkinInUse", HOMELESS);
+            UpdateSkinButtons();
         }
         else
         {
-            homelessButtonText.text = "Buy";
-            buyHomelessButton.interactable = true;
+            int coins = PlayerPrefs.GetInt("Coins", 0);
+            if (coins >= HOMELESS_COST)
+            {
+                coins -= HOMELESS_COST;
+                PlayerPrefs.SetInt("Coins", coins); 
+                ownedSkinsString += (ownedSkinsString == "" ? "" : ",") + HOMELESS; 
+                PlayerPrefs.SetString("OwnedSkins", ownedSkinsString); 
+                PlayerPrefs.SetString("SkinInUse", HOMELESS); 
+                UpdateSkinButtons(); 
+                coinsAmount.text = coins.ToString(); 
+            }
+            else
+            {
+                Debug.Log("Not enough coins to buy skin");
+            }
         }
     }
-
-    public void BuyAstronautSkin()
+    private void UpdateSkinButtons()
     {
-        int coins = PlayerPrefs.GetInt("Coins");
+        string skinInUse = PlayerPrefs.GetString("SkinInUse", ASTRONAUT); 
+        string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", ""); 
+        string[] ownedSkins = ownedSkinsString.Split(',');
 
-        if (coins >= ASTRONAUT_PRICE)
+        Dictionary<string, TextMeshProUGUI> buttonMap = new Dictionary<string, TextMeshProUGUI>()
+    {
+        { ASTRONAUT, astronautButtonText },
+        { HOMELESS, homelessButtonText }
+    };
+
+        foreach (string skin in buttonMap.Keys)
         {
-            coins -= ASTRONAUT_PRICE;
-            PlayerPrefs.SetInt("Coins", coins);
-
-            ownedSkinsString += "," + ASTRONAUT;
-            PlayerPrefs.SetString("OwnedSkins", ownedSkinsString);
-
-            UpdateButtons();
+            if (ownedSkins.Contains(skin))
+            {
+                if (skin == skinInUse)
+                {
+                    buttonMap[skin].text = "In use";
+                }
+                else
+                {
+                    buttonMap[skin].text = "Choose";
+                }
+            }
+            else
+            {
+                buttonMap[skin].text = "Unlock";
+            }
         }
     }
 
-    public void BuyHomelessSkin()
-    {
-        int coins = PlayerPrefs.GetInt("Coins");
-
-        if (coins >= HOMELESS_PRICE)
-        {
-            coins -= HOMELESS_PRICE;
-            PlayerPrefs.SetInt("Coins", coins);
-
-            ownedSkinsString += "," + HOMELESS;
-            PlayerPrefs.SetString("OwnedSkins", ownedSkinsString);
-
-            UpdateButtons();
-        }
-    }
-
-    public void ChooseAstronautSkin()
-    {
-        PlayerPrefs.SetString("SkinInUse", ASTRONAUT);
-        UpdateButtons();
-    }
-
-    public void ChooseHomelessSkin()
-    {
-        PlayerPrefs.SetString("SkinInUse", HOMELESS);
-        UpdateButtons();
-    }
-    //[SerializeField] TextMeshProUGUI astronautButtonText;
+    /////////////////////////////////////////////////////////////////////
     //[SerializeField] TextMeshProUGUI homelessButtonText;
-    //[SerializeField] TextMeshProUGUI coinsAmount;
+    //    [SerializeField] TextMeshProUGUI coinsAmount;
 
     //private const string ASTRONAUT = "astronaut";
     //private const string HOMELESS = "homeless";
@@ -130,10 +213,10 @@ public class ShopUI : MonoBehaviour
     //    string[] ownedSkins = ownedSkinsString.Split(',');
 
     //    Dictionary<string, TextMeshProUGUI> buttonMap = new Dictionary<string, TextMeshProUGUI>()
-    //{
-    //    { ASTRONAUT, astronautButtonText },
-    //    { HOMELESS, homelessButtonText }
-    //};
+    //    {
+    //        { ASTRONAUT, astronautButtonText },
+    //        { HOMELESS, homelessButtonText }
+    //    };
 
     //    foreach (string skin in buttonMap.Keys)
     //    {
