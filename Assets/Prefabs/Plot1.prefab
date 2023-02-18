@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6284728397610453025}
   - component: {fileID: 5845274600886832931}
   m_Layer: 0
-  m_Name: Cube 2
-  m_TagString: Untagged
+  m_Name: Plot1
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
