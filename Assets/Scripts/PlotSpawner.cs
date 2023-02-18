@@ -11,6 +11,7 @@ public class PlotSpawner : MonoBehaviour
     private float lastZPos = 14f;
     private bool isAfterStart=false;
     public List<GameObject> plots;
+    public List<GameObject> lastPlots = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +22,6 @@ public class PlotSpawner : MonoBehaviour
         isAfterStart= true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void SpawnPlot()
     {
         if (isAfterStart)
@@ -42,12 +38,48 @@ public class PlotSpawner : MonoBehaviour
     }
     private void SpawningLogic()
     {
-        GameObject plotL = plots[Random.Range(0, plots.Count)];
-        GameObject plotR = plots[Random.Range(0, plots.Count)];
+        GameObject plotL = null;
+        GameObject plotR = null;
+        bool isPlotFound = false;
+
+        while (!isPlotFound)
+        {
+            plotL = plots[Random.Range(0, plots.Count)];
+            plotR = plots[Random.Range(0, plots.Count)];
+
+            // SprawdŸ, czy wylosowane obiekty s¹ ró¿ne i czy nie znajduj¹ siê ju¿ na liœcie ostatnio wylosowanych obiektów
+            if (plotL != plotR && !lastPlots.Contains(plotL) && !lastPlots.Contains(plotR))
+            {
+                isPlotFound = true;
+                lastPlots.Add(plotL);
+                lastPlots.Add(plotR);
+            }
+        }
+
         float zPos = lastZPos + plotSize;
         Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
         Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
         lastZPos += plotSize;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //GameObject plotL = plots[Random.Range(0, plots.Count)];
+        //GameObject plotR = plots[Random.Range(0, plots.Count)];
+        //float zPos = lastZPos + plotSize;
+        //Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
+        //Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
+        //lastZPos += plotSize;
 
 
     }
