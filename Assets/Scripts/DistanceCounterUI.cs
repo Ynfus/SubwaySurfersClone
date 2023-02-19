@@ -21,8 +21,9 @@ public class DistanceCounter : MonoBehaviour
     private void Update()
     {
         distance = Vector3.Distance(startingPosition, player.transform.position);
+        Debug.Log(distance);
+
         scoreText.text = distance.ToString("F0");
-        // wyœwietl wartoœæ dystansu na ekranie
     }
     public string GetDistanceAmount()
     {

@@ -65,15 +65,15 @@ public class SubwaySurfersGameManager : MonoBehaviour
     {
         TogglePauseGame();
     }
-    public void Reset()
-    {
-        state = State.WaitingToStart;
-        player.ResetPosition();
-        OnStateChanged?.Invoke(this, EventArgs.Empty);
-        DistanceCounter.Instance.ResetDistance();
-        CoinsCounter.Instance.ResetCoins();
+    //public void Reset()
+    //{
+    //    state = State.WaitingToStart;
+    //    player.ResetPosition();
+    //    OnStateChanged?.Invoke(this, EventArgs.Empty);
+    //    DistanceCounter.Instance.ResetDistance();
+    //    CoinsCounter.Instance.ResetCoins();
 
-    }
+    //}
     public void TogglePauseGame()
     {
         isGamePaused = !isGamePaused;

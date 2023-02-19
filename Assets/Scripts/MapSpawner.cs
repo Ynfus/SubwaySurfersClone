@@ -7,7 +7,7 @@ public class MapSpawner : MonoBehaviour
 {
     private int initAmount = 1;
     private float roadSize = 200f;
-    private float lastZPos = 100f;
+    private float lastZPos = 0f;
     public List<GameObject> roads;
     // Start is called before the first frame update
     void Start()

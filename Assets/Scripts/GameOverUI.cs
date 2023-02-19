@@ -33,7 +33,8 @@ public class GameOverUI : MonoBehaviour
         retryButton.onClick.AddListener(() =>
         {
             Hide();
-            SubwaySurfersGameManager.Instance.Reset();
+            Loader.Load(Loader.Scene.GameScene);
+
         });
         mainMenuButton.onClick.AddListener(() =>
         {
