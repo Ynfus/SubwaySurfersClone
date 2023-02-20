@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -61,9 +62,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log("eee");
         }
-        if (other.tag=="SpawnTrigger")
+        if (other.tag == "SpawnTrigger")
         {
-                spawnManager.SpawnTriggerEntered(); 
+            spawnManager.SpawnTriggerEntered();
         }
     }
 
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour
     private void OnMoveRight_performed(InputAction.CallbackContext obj)
     {
         //direction = Vector3.right * 5f;
-        if (transform.position.x <= 4)
+        if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.x <= 4)
         {
             transform.position += Vector3.right * 5f;
         }
@@ -129,7 +130,7 @@ public class Player : MonoBehaviour
     private void OnMoveLeft_performed(InputAction.CallbackContext obj)
     {
         //direction = Vector3.left * 5f;
-        if (transform.position.x >= -4)
+        if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.x >= -4)
         {
             transform.position += Vector3.left * 5f;
         }
@@ -137,7 +138,7 @@ public class Player : MonoBehaviour
 
     private void OnJump_performed(InputAction.CallbackContext obj)
     {
-        if (transform.position.y < 1)
+        if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.y < 1)
         {
             playerRigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
             isJumping = true;
@@ -146,7 +147,10 @@ public class Player : MonoBehaviour
 
 
     }
-
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
     private void OnJump_canceled(InputAction.CallbackContext obj)
     {
         isJumping = false;
@@ -170,7 +174,7 @@ public class Player : MonoBehaviour
         return isResizing;
     }
     public void ResetPosition()
-    { 
+    {
         transform.position = Vector3.zero;
     }
 }

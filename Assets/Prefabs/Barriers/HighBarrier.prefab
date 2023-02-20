@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 456354151629642030}
   - component: {fileID: 6649078341946630193}
   - component: {fileID: 2584171506810490551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1972662421869776483}
   - component: {fileID: 608622518312322770}
   - component: {fileID: 3982912120607300005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567117273330380380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HighBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 1411095992280720542}
   - component: {fileID: 629312357517060008}
   - component: {fileID: 8718019135403983331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
