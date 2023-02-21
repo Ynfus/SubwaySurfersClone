@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private PlayerAnimator playerAnimator;
     public SpawnManager spawnManager;
     private PlayerInputActions playerInputActions;
+    public static Player Instance;
+
 
     private bool isMoving = true;
     float speed = 5f;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     private LayerMask itemLayer1;
     private void Start()
     {
+        Instance= this;
         itemLayer = LayerMask.GetMask("Barrier");
         itemLayer1 = LayerMask.GetMask("Coin");
     }
