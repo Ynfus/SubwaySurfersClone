@@ -16,24 +16,27 @@ public class Car : MonoBehaviour
 
     void Update()
     {
-        //if (!car0moving && Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 200f)
-        //{
-        //    cars[0].transform.localPosition = Vector3.MoveTowards(cars[0].transform.position, pathPoints[0].position, speed * Time.deltaTime);
-        //    car0moving = true;
-        //}
-
-        if (!car1moving && Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 10)
+        speed=Player.Instance.GetSpeed();
+        if (Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 50)
         {
-            Vector3 newPos = cars[1].transform.localPosition + new Vector3(0, 0, 150f);
+            Vector3 newPos = cars[0].transform.localPosition + new Vector3(0, 0, -150f);
+            cars[0].transform.localPosition = Vector3.MoveTowards(cars[0].transform.localPosition, newPos, speed * Time.deltaTime);
+
+        }
+        Debug.Log(Vector3.Distance(road.transform.position, Player.Instance.GetPosition()));
+        if (Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 150)
+        {
+            Vector3 newPos = cars[1].transform.localPosition + new Vector3(0, 0, -150f);
             cars[1].transform.localPosition = Vector3.MoveTowards(cars[1].transform.localPosition, newPos, speed * Time.deltaTime);
-            car1moving = true;
+            
         }
 
-        //if (!car2moving && Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 150)
-        //{
-        //    cars[2].transform.localPosition = Vector3.MoveTowards(cars[2].transform.localPosition, pathPoints[0].localPosition, speed * Time.deltaTime);
-        //    car2moving = true;
-        //}
+        if (Vector3.Distance(road.transform.position, Player.Instance.GetPosition()) < 100)
+        {
+            Vector3 newPos = cars[2].transform.localPosition + new Vector3(0, 0, -150f);
+            cars[2].transform.localPosition = Vector3.MoveTowards(cars[2].transform.localPosition, newPos, speed * Time.deltaTime);
+
+        }
     }
 
 

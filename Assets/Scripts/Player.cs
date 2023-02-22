@@ -154,6 +154,11 @@ public class Player : MonoBehaviour
     {
         return transform.position;
     }
+    public float GetSpeed()
+    {
+        return speed;
+
+    }
     private void OnJump_canceled(InputAction.CallbackContext obj)
     {
         isJumping = false;

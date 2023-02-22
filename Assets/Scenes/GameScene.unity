@@ -4059,8 +4059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roads:
-  - {fileID: 7347664380443761560, guid: 286a8a245e7c28744ba82ec6d9fc147b, type: 3}
-  - {fileID: 7347664380443761560, guid: 6f948b3f1aa6b894490d122222dd0e93, type: 3}
+  - {fileID: 7347664380443761560, guid: 339a7311c2b29904caa909a5e29b9638, type: 3}
 --- !u!114 &820220364
 MonoBehaviour:
   m_ObjectHideFlags: 0
