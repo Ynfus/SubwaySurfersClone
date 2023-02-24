@@ -23,6 +23,6 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Spawned");
         mapSpawner.SpawnRoad();
-        plotSpawner.SpawnPlot();
+        //plotSpawner.SpawnPlot();
     }
 }

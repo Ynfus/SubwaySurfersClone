@@ -4,33 +4,83 @@ using UnityEngine;
 
 public class EnvironmentSpawner : MonoBehaviour
 {
-    public int initialAmount = 5;
-    public float plotSize = 40f;
     public GameObject player;
-
-    private float lastZPosLeft=220f;
-    private float lastZPosRight=220f;
+    private float zPosChange = 620f;
     [SerializeField] List<GameObject> spawnedPlots;
+
+
+    private int initAmount = 16;
+    private float plotSize = 40f;
+    private float xPosLeft = -71.5f;
+    private float xPosRight = 71.5f;
+    private float lastZPos = -20f;
+    private bool isAfterStart = false;
+    private bool isFirstSpawned = false;
+    public List<GameObject> plots;
+    private GameObject lastPlotR;
+    private GameObject lastPlotL;
+    // Start is called before the first frame update
+    void Start()
+    {
+        for (int i = 0; i < initAmount; i++)
+        {
+            SpawningLogic();
+        }
+
+    }
+
+    private void SpawningLogic()
+    {
+        GameObject plotL = null;
+        GameObject plotR = null;
+
+        while (plotL == null || plotR == null || plotL == lastPlotL || plotR == lastPlotR || plotL == plotR)
+        {
+            plotL = plots[Random.Range(0, plots.Count)];
+            plotR = plots[Random.Range(0, plots.Count)];
+        }
+
+        float zPos = lastZPos + plotSize;
+        Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
+        Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
+
+        if (lastPlotL != null && lastPlotR != null && (lastPlotL != plotL || lastPlotR != plotR))
+        {
+            plots.Add(lastPlotL);
+            plots.Add(lastPlotR);
+  
+        }
+
+        lastPlotL = plotL;
+        lastPlotR = plotR;
+        lastZPos += plotSize;
+        spawnedPlots.Add(plotL);
+        spawnedPlots.Add(plotR);
+        plots.Remove(plotL);
+        plots.Remove(plotR);
+    }
 
     void Update()
     {
+        Debug.Log(spawnedPlots.Count+"counts");
         foreach (GameObject plot in spawnedPlots)
         {
-            if (player.transform.position.z - 40 > plot.transform.position.z && plot.transform.position.x > 0)
+            Debug.Log(plot.transform.position.z + "!123");
+            if (player.transform.position.z - plotSize > plot.transform.position.z )
             {
-                lastZPosLeft += 40;
-                plot.transform.Translate(0, 0, lastZPosLeft);
-            }
-            if (player.transform.position.z - 40 > plot.transform.position.z && plot.transform.position.x < 0)
-            {
-                lastZPosRight += 40;
-                plot.transform.Translate(0, 0, lastZPosRight);
+                Debug.Log(plot.transform.position.z + "!1234");
 
-                // Dodaj korektê rotacji w przypadku prefabu obróconego o 180 stopni
-                plot.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+                plot.transform.position += new Vector3(0f, 0f, zPosChange);
             }
+            if (player.transform.position.z - plotSize > plot.transform.position.z && plot.transform.position.x < 0)
+            {
+                plot.transform.position += new Vector3(0f, 0f, zPosChange);
+                
+
+            }
+            Debug.Log(plot.transform.position.z + "!123");
         }
     }
-
 
 }
