@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CoinController : MonoBehaviour
 {
-
+    //chyba do wywalenia 
     void Update()
     {
         RaycastHit hit;

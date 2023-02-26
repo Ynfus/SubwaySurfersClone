@@ -105,6 +105,22 @@ public class Player : MonoBehaviour
                 CoinsCounter.Instance.IncreaseCoinsAmount();
                 hit.collider.gameObject.SetActive(false);
             }
+            if (Physics.Raycast(transform.position, direction, out hit, .5f))
+            {
+                Debug.Log("ez1");
+
+                for (int i = 0; i < hit.collider.transform.childCount; i++)
+                {
+                    Debug.Log("789");
+                    Transform child = hit.collider.transform.GetChild(i);
+                    if (child.CompareTag("CoinMagnet"))
+                    {
+                        Debug.Log("CoinMagnet found!");
+                        MysteryItem.Instance.ActivateCoinMagnet();
+                    }
+
+                }
+            }
         }
 
 
