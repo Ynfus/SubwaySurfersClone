@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DistanceCounter : MonoBehaviour
@@ -9,9 +10,10 @@ public class DistanceCounter : MonoBehaviour
     [SerializeField] Player player;
     public static DistanceCounter Instance;
 
-    private Vector3 startingPosition;
+    private float startingPosition;
     private float distance;
     private float distanceFromLast;
+    private float lastPosition;
     private bool doublePoints = false;
     private float doublePointsActiveTime = 15f;
     private float doublePointsTimer = 0f;
@@ -19,22 +21,23 @@ public class DistanceCounter : MonoBehaviour
     private void Start()
     {
         Instance= this;
-        startingPosition = player.transform.position;
+        startingPosition = player.transform.position.z;
     }
 
     private void Update()
     {
         
-        distanceFromLast = Vector3.Distance(startingPosition, player.transform.position)-distance;
+        distanceFromLast =  (player.transform.position.z- startingPosition)  -lastPosition;
         if (doublePoints)
         {
-            distance += distanceFromLast * 200;
+            distance += distanceFromLast * 20;
             doublePointsTimer -= Time.deltaTime;
             if (doublePointsTimer <= 0f)
             {
                 doublePoints = false;
             }
         }
+        lastPosition = player.transform.position.z - startingPosition;
         distance += distanceFromLast;
         Debug.Log(distance+"   "+ player.transform.position+"     "+distanceFromLast);
 
