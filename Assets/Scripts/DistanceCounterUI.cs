@@ -11,6 +11,10 @@ public class DistanceCounter : MonoBehaviour
 
     private Vector3 startingPosition;
     private float distance;
+    private float distanceFromLast;
+    private bool doublePoints = false;
+    private float doublePointsActiveTime = 15f;
+    private float doublePointsTimer = 0f;
 
     private void Start()
     {
@@ -20,8 +24,19 @@ public class DistanceCounter : MonoBehaviour
 
     private void Update()
     {
-        distance = Vector3.Distance(startingPosition, player.transform.position);
-        Debug.Log(distance);
+        
+        distanceFromLast = Vector3.Distance(startingPosition, player.transform.position)-distance;
+        if (doublePoints)
+        {
+            distance += distanceFromLast * 200;
+            doublePointsTimer -= Time.deltaTime;
+            if (doublePointsTimer <= 0f)
+            {
+                doublePoints = false;
+            }
+        }
+        distance += distanceFromLast;
+        Debug.Log(distance+"   "+ player.transform.position+"     "+distanceFromLast);
 
         scoreText.text = distance.ToString("F0");
     }
@@ -33,5 +48,10 @@ public class DistanceCounter : MonoBehaviour
     { 
         distance= 0;
     
+    }
+    public void ActivateDoublePoints()
+    {
+        doublePoints = true;
+        doublePointsTimer = doublePointsActiveTime;
     }
 }

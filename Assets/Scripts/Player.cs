@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private LayerMask itemLayer1;
     private void Start()
     {
-        Instance= this;
+        Instance = this;
         itemLayer = LayerMask.GetMask("Barrier");
         itemLayer1 = LayerMask.GetMask("Coin");
     }
@@ -111,14 +111,29 @@ public class Player : MonoBehaviour
 
                 for (int i = 0; i < hit.collider.transform.childCount; i++)
                 {
+
                     Debug.Log("789");
                     Transform child = hit.collider.transform.GetChild(i);
-                    if (child.CompareTag("CoinMagnet"))
+                    if (child.gameObject.activeSelf)
                     {
-                        Debug.Log("CoinMagnet found!");
-                        MysteryItem.Instance.ActivateCoinMagnet();
-                    }
+                        if (child.CompareTag("CoinMagnet"))
+                        {
+                            Debug.Log("CoinMagnet found!");
+                            DistanceCounter.Instance.ActivateDoublePoints();
+                            //MysteryItem.Instance.ActivateCoinMagnet();
+                            //hit.collider.gameObject.SetActive(false);
 
+                        }
+                        if (child.CompareTag("SpeedDown"))
+                        {
+
+                            Debug.Log(speed + " speed " + child);
+                            speed += transform.position.z > 500 ? -1f : 1f;
+                            Debug.Log(speed + " speed " + child);
+                            hit.collider.gameObject.SetActive(false);
+
+                        }
+                    }
                 }
             }
         }

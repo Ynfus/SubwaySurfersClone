@@ -9,6 +9,7 @@ TagManager:
   - MysteryItem
   - CoinMagnet
   - Coin
+  - SpeedDown
   layers:
   - Default
   - TransparentFX

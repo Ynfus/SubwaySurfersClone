@@ -15,9 +15,10 @@ public class MysteryItem : MonoBehaviour
     void Start()
     {
 
-        Transform visual = gameObject.transform.GetChild(Random.Range(0, gameObject.transform.childCount));
-        visual.gameObject.SetActive(true);
-
+        Transform child = gameObject.transform.GetChild(Random.Range(0, gameObject.transform.childCount));
+        Transform grandchild = child.transform.GetChild(0);
+        child.gameObject.SetActive(true);
+        grandchild.gameObject.SetActive(true);
 
 
 
@@ -61,11 +62,15 @@ public class MysteryItem : MonoBehaviour
         while (elapsedTime < magnetDuration)
         {
             Collider[] colliders = Physics.OverlapSphere(Player.Instance.GetPosition(), magnetRadius);
+            Debug.Log("12 999");
 
             foreach (Collider collider in colliders)
             {
+                Debug.Log("123 999");
+
                 if (collider.gameObject.layer == LayerMask.NameToLayer("Coin"))
                 {
+                    Debug.Log("1234 999");
                     CoinsCounter.Instance.IncreaseCoinsAmount();
                     collider.gameObject.SetActive(false);
                 }
