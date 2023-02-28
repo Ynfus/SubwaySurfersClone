@@ -31,6 +31,33 @@ public class EnvironmentSpawner : MonoBehaviour
 
     private void SpawningLogic()
     {
+        //GameObject plotL = null;
+        //GameObject plotR = null;
+
+        //while (plotL == null || plotR == null || plotL == lastPlotL || plotR == lastPlotR || plotL == plotR)
+        //{
+        //    plotL = plots[Random.Range(0, plots.Count)];
+        //    plotR = plots[Random.Range(0, plots.Count)];
+        //}
+
+        //float zPos = lastZPos + plotSize;
+        //Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
+        //Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
+        //spawnedPlots.Add(plotL);
+        //spawnedPlots.Add(plotR);
+        //if (lastPlotL != null && lastPlotR != null && (lastPlotL != plotL || lastPlotR != plotR))
+        //{
+        //    plots.Add(lastPlotL);
+        //    plots.Add(lastPlotR);
+
+        //}
+
+        //lastPlotL = plotL;
+        //lastPlotR = plotR;
+        //lastZPos += plotSize;
+
+        //plots.Remove(plotL);
+        //plots.Remove(plotR);
         GameObject plotL = null;
         GameObject plotR = null;
 
@@ -41,21 +68,20 @@ public class EnvironmentSpawner : MonoBehaviour
         }
 
         float zPos = lastZPos + plotSize;
-        Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
-        Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
+        GameObject plotLInstance = Instantiate(plotL, new Vector3(xPosLeft, 0, zPos), plotL.transform.rotation);
+        GameObject plotRInstance = Instantiate(plotR, new Vector3(xPosRight, 0, zPos), new Quaternion(0, 180, 0, 0));
 
         if (lastPlotL != null && lastPlotR != null && (lastPlotL != plotL || lastPlotR != plotR))
         {
             plots.Add(lastPlotL);
             plots.Add(lastPlotR);
-  
         }
 
         lastPlotL = plotL;
         lastPlotR = plotR;
         lastZPos += plotSize;
-        spawnedPlots.Add(plotL);
-        spawnedPlots.Add(plotR);
+        spawnedPlots.Add(plotLInstance);
+        spawnedPlots.Add(plotRInstance);
         plots.Remove(plotL);
         plots.Remove(plotR);
     }
@@ -66,20 +92,18 @@ public class EnvironmentSpawner : MonoBehaviour
         foreach (GameObject plot in spawnedPlots)
         {
             Debug.Log(plot.transform.position.z + "!123");
-            if (player.transform.position.z - plotSize > plot.transform.position.z )
+            if (player.transform.position.z - plotSize > plot.transform.position.z)
             {
-                Debug.Log(plot.transform.position.z + "!1234");
 
 
                 plot.transform.position += new Vector3(0f, 0f, zPosChange);
             }
-            if (player.transform.position.z - plotSize > plot.transform.position.z && plot.transform.position.x < 0)
-            {
-                plot.transform.position += new Vector3(0f, 0f, zPosChange);
-                
+            //if (player.transform.position.z - plotSize > plot.transform.position.z && plot.transform.position.x < 0)
+            //{
+            //    plot.transform.position += new Vector3(0f, 0f, zPosChange);
 
-            }
-            Debug.Log(plot.transform.position.z + "!123");
+
+            //}
         }
     }
 

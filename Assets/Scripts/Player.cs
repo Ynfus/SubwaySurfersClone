@@ -119,9 +119,15 @@ public class Player : MonoBehaviour
                         if (child.CompareTag("CoinMagnet"))
                         {
                             Debug.Log("CoinMagnet found!");
-                            DistanceCounter.Instance.ActivateDoublePoints();
-                            //MysteryItem.Instance.ActivateCoinMagnet();
+                            MysteryItem.Instance.ActivateCoinMagnet();
                             //hit.collider.gameObject.SetActive(false);
+
+                        }
+                        if (child.CompareTag("DoublePoints"))
+                        {
+                            Debug.Log("CoinMagnet found!");
+                            DistanceCounter.Instance.ActivateDoublePoints();
+
 
                         }
                         if (child.CompareTag("SpeedDown"))
