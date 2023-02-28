@@ -10,6 +10,7 @@ TagManager:
   - CoinMagnet
   - Coin
   - SpeedDown
+  - DoublePoints
   layers:
   - Default
   - TransparentFX
