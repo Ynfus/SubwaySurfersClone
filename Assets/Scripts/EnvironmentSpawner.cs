@@ -94,16 +94,9 @@ public class EnvironmentSpawner : MonoBehaviour
             Debug.Log(plot.transform.position.z + "!123");
             if (player.transform.position.z - plotSize > plot.transform.position.z)
             {
-
-
                 plot.transform.position += new Vector3(0f, 0f, zPosChange);
             }
-            //if (player.transform.position.z - plotSize > plot.transform.position.z && plot.transform.position.x < 0)
-            //{
-            //    plot.transform.position += new Vector3(0f, 0f, zPosChange);
 
-
-            //}
         }
     }
 
