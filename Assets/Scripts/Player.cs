@@ -59,17 +59,17 @@ public class Player : MonoBehaviour
         isResizing = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Barrier")
-        {
-            Debug.Log("eee");
-        }
-        if (other.tag == "SpawnTrigger")
-        {
-            spawnManager.SpawnTriggerEntered();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Barrier")
+    //    {
+    //        Debug.Log("eee");
+    //    }
+    //    if (other.tag == "SpawnTrigger")
+    //    {
+    //        spawnManager.SpawnTriggerEntered();
+    //    }
+    //}
 
 
 
@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
         if (SubwaySurfersGameManager.Instance.IsGamePlaying())
         {
             Vector3 direction = transform.TransformDirection(Vector3.forward);
-
             if (Physics.Raycast(transform.position, direction, 2f, itemLayer))
             {
                 Debug.Log("Wykryto przedmiot: ");
@@ -144,35 +143,20 @@ public class Player : MonoBehaviour
             }
         }
 
-
-
-        //if (playerRigidbody.position.y < 0.2)
-        //{
-        //    isJumping = false;
-        //}
-
-        //if (isMoving)
-        //{
-        //    transform.position += Vector3.forward * Time.deltaTime;
-
-        //}
-        //transform.position += direction*Time.deltaTime;
     }
     private void OnMoveRight_performed(InputAction.CallbackContext obj)
     {
-        //direction = Vector3.right * 5f;
         if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.x <= 4)
         {
-            transform.position += Vector3.right * 5f;
+            transform.position += Vector3.right * 6f;
         }
     }
 
     private void OnMoveLeft_performed(InputAction.CallbackContext obj)
     {
-        //direction = Vector3.left * 5f;
         if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.x >= -4)
         {
-            transform.position += Vector3.left * 5f;
+            transform.position += Vector3.left * 6f;
         }
     }
 
