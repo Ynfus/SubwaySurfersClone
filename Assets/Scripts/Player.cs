@@ -119,13 +119,14 @@ public class Player : MonoBehaviour
                         {
                             Debug.Log("CoinMagnet found!");
                             MysteryItem.Instance.ActivateCoinMagnet();
-                            //hit.collider.gameObject.SetActive(false);
+                            hit.collider.transform.GetChild(0).gameObject.SetActive(false);
 
                         }
                         if (child.CompareTag("DoublePoints"))
                         {
                             Debug.Log("CoinMagnet found!");
                             DistanceCounter.Instance.ActivateDoublePoints();
+                            hit.collider.gameObject.SetActive(false);
 
 
                         }

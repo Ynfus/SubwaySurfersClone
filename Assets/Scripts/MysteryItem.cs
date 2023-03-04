@@ -34,6 +34,7 @@ public class MysteryItem : MonoBehaviour
     public void ActivateCoinMagnet()
     {
         StartCoroutine(CoinMagnetCoroutine());
+        
     }
 
     private IEnumerator CoinMagnetCoroutine()
@@ -71,6 +72,8 @@ public class MysteryItem : MonoBehaviour
                 if (collider.gameObject.layer == LayerMask.NameToLayer("Coin"))
                 {
                     Debug.Log("1234 999");
+                    SoundManager.Instance.PlayCoinSound();
+
                     CoinsCounter.Instance.IncreaseCoinsAmount();
                     collider.gameObject.SetActive(false);
                 }
