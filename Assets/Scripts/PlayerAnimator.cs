@@ -10,6 +10,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string IS_RESIZING = "IsResizing";
     private const string IS_GAMEOVER = "IsGameOver";
     private Animator animator;
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -24,12 +25,13 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool(IS_RESIZING, player.IsResizing());
         animator.SetBool(IS_GAMEOVER, SubwaySurfersGameManager.Instance.IsGameOver());
     }
-    public void IsGrounded()
-    { 
-        if (player.transform.position.y==0) 
-        {
-        
-        }
+    public void SetIsJumpingFalse()
+    {
+            Player.Instance.SetIsJumpingFalse();
+    }
+    public void SetIsAnimationJumpingFalse()
+    {
+        Player.Instance.SetIsAnimationJumpingFalse();
     }
 
 }
