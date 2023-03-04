@@ -9,33 +9,35 @@ public class ShopUI : MonoBehaviour
 {
     [SerializeField] Button cyclistButton;
     [SerializeField] Button actionHeroButton;
-    [SerializeField] Button explorerButton;  
+    [SerializeField] Button explorerButton;
     [SerializeField] Button constructionWorkerButton;
     [SerializeField] Button clownButton;
-    [SerializeField] Button eskimoButton;    
+    [SerializeField] Button eskimoButton;
     [SerializeField] Button farmerButton;
     [SerializeField] Button paramedicButton;
-    [SerializeField] Button policeButton;    
+    [SerializeField] Button policeButton;
     [SerializeField] Button businessButton;
     [SerializeField] Button astronautButton;
     [SerializeField] Button clausButton;
     [SerializeField] Button cowboyButton;
     [SerializeField] Button firefighterButton;
-    [SerializeField] Button hazardButton;  
+    [SerializeField] Button hazardButton;
     [SerializeField] Button mechanicButton;
     [SerializeField] Button mummyButton;
-    [SerializeField] Button navalOfficerButton;    
+    [SerializeField] Button navalOfficerButton;
     [SerializeField] Button pilotButton;
     [SerializeField] Button pirateButton;
-    [SerializeField] Button raceDriverButton;    
+    [SerializeField] Button raceDriverButton;
     [SerializeField] Button skateButton;
     [SerializeField] Button skeletonButton;
     [SerializeField] Button skiManButton;
     [SerializeField] Button superHeroButton;
-    [SerializeField] Button vikingButton;    
+    [SerializeField] Button vikingButton;
     [SerializeField] Button wizardButton;
     [SerializeField] Button yetiButton;
     [SerializeField] Button zombieButton;
+   
+    [SerializeField] Button backButton;
 
     [SerializeField] TextMeshProUGUI cyclistButtonText;
     [SerializeField] TextMeshProUGUI actionHeroButtonText;
@@ -66,17 +68,40 @@ public class ShopUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI wizardButtonText;
     [SerializeField] TextMeshProUGUI yetiButtonText;
     [SerializeField] TextMeshProUGUI zombieButtonText;
-    
-    
+
+
     [SerializeField] TextMeshProUGUI coinsAmount;
 
 
     private const string CYCLIST = "cyclist";
-    //private const string HOMELESS = "homeless";
-    //private const string CYCLIST = "cyclist";
-    //private const int ASTRONAUT_COST = 10;
-    //private const int HOMELESS_COST = 20;
-    //private const int CYCLIST_COST = 20;
+    private const string ACTIONHERO = "actionHero";
+    private const string EXPLORER = "explorer";
+    private const string CONSTRUCTIONWORKER = "constructionWorker";
+    private const string CLOWN = "clown";
+    private const string ESKIMO = "eskimo";
+    private const string FARMER = "farmer";
+    private const string PARAMEDIC = "paramedic";
+    private const string POLICE = "police";
+    private const string BUSINESS = "business";
+    private const string ASTRONAUT = "astronaut";
+    private const string CLAUS = "claus";
+    private const string COWBOY = "cowboy";
+    private const string FIREFIGHTER = "fireFighter";
+    private const string HAZARD = "hazard";
+    private const string MECHANIC = "mechanic";
+    private const string MUMMY = "mummy";
+    private const string NAVALOFFICER = "navalOfficer";
+    private const string PILOT = "pilot";
+    private const string PIRATE = "pirate";
+    private const string RACEDRIVER = "raceDriver";
+    private const string SKATE = "skate";
+    private const string SKELETON = "skeleton";
+    private const string SKIMAN = "skiMan";
+    private const string SUPERHERO = "superHero";
+    private const string VIKING = "viking";
+    private const string WIZARD = "wizard";
+    private const string YETI = "yeti";
+    private const string ZOMBIE = "zombie";
 
     struct Skin
     {
@@ -93,40 +118,40 @@ public class ShopUI : MonoBehaviour
         }
     }
     private List<Skin> skins = new List<Skin>();
-  
-    
+
+
     private void Start()
     {
         skins.AddRange(new List<Skin> {
-            new Skin("cyclist", 10, astronautButton, astronautButtonText),
-            new Skin("actionHero", 10, actionHeroButton, actionHeroButtonText),
-            new Skin("explorer", 10, explorerButton, explorerButtonText),
-            new Skin("constructionWorker", 10, constructionWorkerButton, constructionWorkerButtonText),
-            new Skin("clown", 10, clownButton, clownButtonText),
-            new Skin("eskimo", 10, eskimoButton, eskimoButtonText),
-            new Skin("farmer", 10, farmerButton, farmerButtonText),
-            new Skin("paramedic", 10, paramedicButton, paramedicButtonText),
-            new Skin("police", 10, policeButton, policeButtonText),
-            new Skin("business", 10, businessButton, businessButtonText),
-            new Skin("astronaut", 10, astronautButton, astronautButtonText),
-            new Skin("claus", 10, clausButton, clausButtonText),
-            new Skin("cowboy", 10, cowboyButton, cowboyButtonText),
-            new Skin("fireFighter", 10, firefighterButton, firefighterButtonText),
-            new Skin("hazard", 10, hazardButton, hazardButtonText),
-            new Skin("mechanic", 10, mechanicButton, mechanicButtonText),
-            new Skin("mummy", 10, mummyButton, mummyButtonText),
-            new Skin("navalOfficer", 10, navalOfficerButton, navalOfficerButtonText),
-            new Skin("pilot", 10, pilotButton, pilotButtonText),
-            new Skin("pirate", 10, pirateButton, pirateButtonText),
-            new Skin("raceDriver", 10, raceDriverButton, raceDriverButtonText),
-            new Skin("skate", 10, skateButton, skateButtonText),
-            new Skin("skeleton", 10, skeletonButton, skeletonButtonText),
-            new Skin("skiMan", 10, skiManButton, skiManButtonText),
-            new Skin("superHero", 10, superHeroButton, superHeroButtonText),
-            new Skin("viking", 10, vikingButton, vikingButtonText),
-            new Skin("wizard", 10, wizardButton, wizardButtonText),
-            new Skin("yeti", 10, yetiButton, yetiButtonText),
-            new Skin("zombie", 10, zombieButton, zombieButtonText),
+            new Skin(CYCLIST, 10, cyclistButton, cyclistButtonText),
+            new Skin(ACTIONHERO, 10, actionHeroButton, actionHeroButtonText),
+            new Skin(EXPLORER, 10, explorerButton, explorerButtonText),
+            new Skin(CONSTRUCTIONWORKER, 10, constructionWorkerButton, constructionWorkerButtonText),
+            new Skin( CLOWN,10, clownButton, clownButtonText),
+            new Skin(ESKIMO, 10, eskimoButton, eskimoButtonText),
+            new Skin(FARMER, 10, farmerButton, farmerButtonText),
+            new Skin(PARAMEDIC, 10, paramedicButton, paramedicButtonText),
+            new Skin(POLICE, 10, policeButton, policeButtonText),
+            new Skin(BUSINESS, 10, businessButton, businessButtonText),
+            new Skin(ASTRONAUT, 10, astronautButton, astronautButtonText),
+            new Skin( CLAUS,10, clausButton, clausButtonText),
+            new Skin(COWBOY, 10, cowboyButton, cowboyButtonText),
+            new Skin(FIREFIGHTER, 10, firefighterButton, firefighterButtonText),
+            new Skin(HAZARD, 10, hazardButton, hazardButtonText),
+            new Skin(MECHANIC, 10, mechanicButton, mechanicButtonText),
+            new Skin( MUMMY,10, mummyButton, mummyButtonText),
+            new Skin(NAVALOFFICER, 10, navalOfficerButton, navalOfficerButtonText),
+            new Skin(PILOT, 10, pilotButton, pilotButtonText),
+            new Skin(PIRATE, 10, pirateButton, pirateButtonText),
+            new Skin(RACEDRIVER, 10, raceDriverButton, raceDriverButtonText),
+            new Skin( SKATE, 10, skateButton, skateButtonText),
+            new Skin(SKELETON, 10, skeletonButton, skeletonButtonText),
+            new Skin(SKIMAN, 10, skiManButton, skiManButtonText),
+            new Skin(SUPERHERO, 10, superHeroButton, superHeroButtonText),
+            new Skin(VIKING, 10, vikingButton, vikingButtonText),
+            new Skin(WIZARD, 10, wizardButton, wizardButtonText),
+            new Skin(YETI,10, yetiButton, yetiButtonText),
+            new Skin(ZOMBIE, 10, zombieButton, zombieButtonText),
 
         });
         //PlayerPrefs.DeleteKey("OwnedSkins");
@@ -136,8 +161,13 @@ public class ShopUI : MonoBehaviour
         {
             skin.button.onClick.AddListener(() => BuySkin(skin));
         }
-
+        backButton.onClick.AddListener(() => GoBack());
         UpdateSkinButtons();
+    }
+    private void GoBack()
+    { 
+        gameObject.SetActive(false);
+    
     }
     private void BuySkin(Skin skin)
     {
@@ -166,7 +196,7 @@ public class ShopUI : MonoBehaviour
     }
     private void UpdateSkinButtons()
     {
-        string skinInUse = PlayerPrefs.GetString("SkinInUse", CYCLIST);
+        string skinInUse = PlayerPrefs.GetString("SkinInUse",CYCLIST);
         string ownedSkinsString = PlayerPrefs.GetString("OwnedSkins", "");
         string[] ownedSkins = ownedSkinsString.Split(',');
 
@@ -188,10 +218,7 @@ public class ShopUI : MonoBehaviour
                 skin.buttonText.text = "Unlock for: " + skin.cost.ToString();
             }
         }
-        foreach (var item in ownedSkins)
-        {
-            Debug.Log(item);
-        }
+
     }
 
 
