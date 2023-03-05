@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
         playerInputActions.Player.OnJump.performed += OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed += OnMoveRight_performed;
-        //playerInputActions.Player.OnJump.canceled += OnJump_canceled;
         playerInputActions.Player.OnResizing.performed += OnResizing_performed;
         playerInputActions.Player.OnResizing.canceled += OnResizing_canceled;
 
@@ -49,7 +48,6 @@ public class Player : MonoBehaviour
         playerInputActions.Player.OnJump.performed -= OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed -= OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed -= OnMoveRight_performed;
-        //playerInputActions.Player.OnJump.canceled -= OnJump_canceled;
         playerInputActions.Player.OnResizing.performed -= OnResizing_performed;
         playerInputActions.Player.OnResizing.canceled -= OnResizing_canceled;
         playerInputActions.Dispose();
@@ -60,17 +58,6 @@ public class Player : MonoBehaviour
         isResizing = false;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "Barrier")
-    //    {
-    //        Debug.Log("eee");
-    //    }
-    //    if (other.tag == "SpawnTrigger")
-    //    {
-    //        spawnManager.SpawnTriggerEntered();
-    //    }
-    //}
 
 
 
@@ -164,9 +151,9 @@ public class Player : MonoBehaviour
 
     private void OnJump_performed(InputAction.CallbackContext obj)
     {
-        if (!SubwaySurfersGameManager.Instance.IsGameOver() && transform.position.y < 1 && !isJumping && !isAnimationJumping)
+        if (!SubwaySurfersGameManager.Instance.IsGameOver() && /*transform.position.y < 1 &&*/ !isJumping && !isAnimationJumping)
         {
-            playerRigidbody.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.up * 6f, ForceMode.Impulse);
             isJumping = true;
             isAnimationJumping = true;
 
@@ -193,11 +180,6 @@ public class Player : MonoBehaviour
         return speed;
 
     }
-    //private void OnJump_canceled(InputAction.CallbackContext obj)
-    //{
-    //    isJumping = false;
-    //}
-
     private void OnResizing_performed(InputAction.CallbackContext obj)
     {
         isResizing = true;
