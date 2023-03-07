@@ -63,15 +63,12 @@ public class MysteryItem : MonoBehaviour
         while (elapsedTime < magnetDuration)
         {
             Collider[] colliders = Physics.OverlapSphere(Player.Instance.GetPosition(), magnetRadius);
-            Debug.Log("12 999");
 
             foreach (Collider collider in colliders)
             {
-                Debug.Log("123 999");
 
                 if (collider.gameObject.layer == LayerMask.NameToLayer("Coin"))
                 {
-                    Debug.Log("1234 999");
                     SoundManager.Instance.PlayCoinSound();
 
                     CoinsCounter.Instance.IncreaseCoinsAmount();

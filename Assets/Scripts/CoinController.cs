@@ -15,7 +15,6 @@ public class CoinController : MonoBehaviour
             {
                 CoinsCounter.Instance.IncreaseCoinsAmount();
                 Destroy(gameObject);
-                Debug.Log("werwerwef");
             }
         }
     }

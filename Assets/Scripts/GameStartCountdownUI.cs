@@ -41,12 +41,10 @@ public class GameStartCountdownUI : MonoBehaviour
         if (SubwaySurfersGameManager.Instance.IsCountdownToStartActive())
         {
             Show();
-            Debug.Log("eeeeeea");
         }
         else
         {
             Hide();
-            Debug.Log("eeeeeeaHide");
         }
     }
     private void Show()

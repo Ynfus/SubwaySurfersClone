@@ -39,8 +39,6 @@ public class DistanceCounter : MonoBehaviour
         }
         lastPosition = player.transform.position.z - startingPosition;
         distance += distanceFromLast;
-        Debug.Log(distance+"   "+ player.transform.position+"     "+distanceFromLast);
-
         scoreText.text = distance.ToString("F0");
     }
     public string GetDistanceAmount()

@@ -92,7 +92,6 @@ public class SubwaySurfersGameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(state);
         switch (state)
         {
             case State.WaitingToStart:
@@ -128,7 +127,6 @@ public class SubwaySurfersGameManager : MonoBehaviour
         int currentCoins = PlayerPrefs.GetInt("Coins", 0);
         currentCoins += CoinsCounter.Instance.GetCoinsAmount();
         PlayerPrefs.SetInt("Coins", currentCoins);
-        Debug.Log(currentCoins);
         isSaved= true;
     }
     public bool IsGamePlaying()
@@ -138,7 +136,6 @@ public class SubwaySurfersGameManager : MonoBehaviour
     }
     public bool IsCountdownToStartActive()
     {
-        Debug.Log(state);
         return state == State.CountdownToStart;
     }
     public float GetCountdownToStartTimer()

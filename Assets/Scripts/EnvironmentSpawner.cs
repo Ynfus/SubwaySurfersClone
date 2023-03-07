@@ -88,10 +88,8 @@ public class EnvironmentSpawner : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(spawnedPlots.Count+"counts");
         foreach (GameObject plot in spawnedPlots)
         {
-            Debug.Log(plot.transform.position.z + "!123");
             if (player.transform.position.z - plotSize > plot.transform.position.z)
             {
                 plot.transform.position += new Vector3(0f, 0f, zPosChange);

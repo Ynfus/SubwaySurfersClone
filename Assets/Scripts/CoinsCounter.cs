@@ -14,7 +14,6 @@ public class CoinsCounter : MonoBehaviour
     public void IncreaseCoinsAmount()
     {
         coins++;
-        Debug.Log(coins);
     }
     public int GetCoinsAmount()
     {
