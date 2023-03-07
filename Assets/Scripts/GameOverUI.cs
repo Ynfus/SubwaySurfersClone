@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,13 +13,14 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] Button retryButton;
     private void Start()
     {
-        SubwaySurfersGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
+        SubwaySurfersGameManager.Instance.OnStateChanged += SubwaySurfersGameManager_OnStateChanged;
         Hide();
     }
-    private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e)
+    private async void SubwaySurfersGameManager_OnStateChanged(object sender, System.EventArgs e)
     {
         if (SubwaySurfersGameManager.Instance.IsGameOver())
         {
+            await Task.Delay(3000);
             Show();
             coinsText.text = CoinsCounter.Instance.GetCoinsAmount().ToString();
             scoreText.text= DistanceCounter.Instance.GetDistanceAmount();

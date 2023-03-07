@@ -68,8 +68,9 @@ public class Player : MonoBehaviour
             Vector3 direction = transform.TransformDirection(Vector3.forward);
             if (Physics.Raycast(transform.position, direction, 2f, itemLayer))
             {
-                Debug.Log("Wykryto przedmiot: ");
                 isCollision = true;
+                SoundManager.Instance.PlayDeathSound();
+
             }
             else
             {
@@ -87,32 +88,27 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direction, out hit, .5f, itemLayer1))
             {
-                Debug.Log("Wykryto przedmiot: asdasdasdasdasdasdasdasdasdasddasdd");
                 SoundManager.Instance.PlayCoinSound();
                 CoinsCounter.Instance.IncreaseCoinsAmount();
                 hit.collider.gameObject.SetActive(false);
             }
             if (Physics.Raycast(transform.position, direction, out hit, .5f))
             {
-                Debug.Log("ez1");
-
                 for (int i = 0; i < hit.collider.transform.childCount; i++)
                 {
 
-                    Debug.Log("789");
+                    
                     Transform child = hit.collider.transform.GetChild(i);
                     if (child.gameObject.activeSelf)
                     {
                         if (child.CompareTag("CoinMagnet"))
                         {
-                            Debug.Log("CoinMagnet found!");
                             MysteryItem.Instance.ActivateCoinMagnet();
                             hit.collider.transform.GetChild(0).gameObject.SetActive(false);
 
                         }
                         if (child.CompareTag("DoublePoints"))
                         {
-                            Debug.Log("CoinMagnet found!");
                             DistanceCounter.Instance.ActivateDoublePoints();
                             hit.collider.gameObject.SetActive(false);
 
@@ -121,9 +117,7 @@ public class Player : MonoBehaviour
                         if (child.CompareTag("SpeedDown"))
                         {
 
-                            Debug.Log(speed + " speed " + child);
                             speed += transform.position.z > 500 ? -1f : 1f;
-                            Debug.Log(speed + " speed " + child);
                             hit.collider.gameObject.SetActive(false);
 
                         }
@@ -163,12 +157,10 @@ public class Player : MonoBehaviour
     }
     public void SetIsJumpingFalse()
     {
-        Debug.Log("nareszcie");
         isJumping = false;
     }
     public void SetIsAnimationJumpingFalse()
     {
-        Debug.Log("nareszcie2");
         isAnimationJumping = false;
     }
     public Vector3 GetPosition()
