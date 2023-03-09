@@ -18,8 +18,6 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(SubwaySurfersGameManager.Instance.IsGamePlaying());
-
         animator.SetBool(IS_PLAYING, SubwaySurfersGameManager.Instance.IsGamePlaying());
         animator.SetBool(IS_JUMPING, player.IsJumping());
         animator.SetBool(IS_RESIZING, player.IsResizing());
