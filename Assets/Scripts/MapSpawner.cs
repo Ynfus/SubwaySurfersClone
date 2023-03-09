@@ -18,10 +18,10 @@ public class MapSpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnTriggerEntered()
     {
-
+        Debug.Log("jestem");
+        SpawnRoad();
     }
     public void SpawnRoad()
     {

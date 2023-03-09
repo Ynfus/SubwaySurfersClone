@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class CoinController : MonoBehaviour
 {
-    //chyba do wywalenia 
-    void Update()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
-        {
-            if (hit.collider.CompareTag("Player"))
-            {
-                CoinsCounter.Instance.IncreaseCoinsAmount();
-                Destroy(gameObject);
-            }
-        }
-    }
+    ////chyba do wywalenia 
+    //void Update()
+    //{
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
+    //    {
+    //        if (hit.collider.CompareTag("Player"))
+    //        {
+    //            CoinsCounter.Instance.IncreaseCoinsAmount();
+    //            Destroy(gameObject);
+    //        }
+    //    }
+    //}
 }
