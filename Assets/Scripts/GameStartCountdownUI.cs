@@ -16,13 +16,11 @@ public class GameStartCountdownUI : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
         SubwaySurfersGameManager.Instance.OnStateChanged += SubwaySurfersGameManager_OnStateChanged;
         Hide();
     }
+
+
     private void Update()
     {
         int countdownNumber = Mathf.CeilToInt(SubwaySurfersGameManager.Instance.GetCountdownToStartTimer());
@@ -37,16 +35,8 @@ public class GameStartCountdownUI : MonoBehaviour
 
     private void SubwaySurfersGameManager_OnStateChanged(object sender, System.EventArgs e)
     {
-        
-        if (SubwaySurfersGameManager.Instance.IsCountdownToStartActive())
-        {
-            Show();
 
-        }
-        else
-        {
-            Hide();
-        }
+        gameObject.SetActive(SubwaySurfersGameManager.Instance.IsCountdownToStartActive());        
     }
     private void Show()
     {

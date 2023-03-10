@@ -1268,6 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8fcde0b2b1386418cc6d8ebe48528c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinsAmountText: {fileID: 1113595846}
 --- !u!4 &158509016
 Transform:
   m_ObjectHideFlags: 0
@@ -6563,7 +6564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &878392478
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12601,7 +12602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1857706791}
   - component: {fileID: 1857706792}
-  - component: {fileID: 1857706793}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -12639,19 +12639,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 898768436}
   player: {fileID: 710409047}
---- !u!114 &1857706793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857706790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192b19e69d8d5b24889f6a3c9410a10f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinsAmountText: {fileID: 1113595846}
 --- !u!1 &1879956951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4741215524253481693, guid: 8f4d3aba7cf16a84cb202852524c6500,
@@ -13826,6 +13813,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MysteryItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136558194248786233, guid: 7a15e59ab16bf474aa698262e0f8916d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1136558194248786233, guid: 7a15e59ab16bf474aa698262e0f8916d,
         type: 3}

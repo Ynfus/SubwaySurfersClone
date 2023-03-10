@@ -87,20 +87,22 @@ public class GameInput : MonoBehaviour
     }
     public void RebindBinding(Binding binding, Action onActionRebound)
     {
+        Debug.Log(Binding.Move_Left);
+        Debug.Log(Binding.Move_Right);
+        Debug.Log(Binding.Pause);
         playerInputActions.Player.Disable();
         InputAction inputAction;
         int bindingIndex;
         switch (binding)
         {
             default:
-
             case Binding.Move_Left:
                 inputAction = playerInputActions.Player.OnMoveLeft;
-                bindingIndex = 3;
+                bindingIndex = 0;
                 break;
             case Binding.Move_Right:
                 inputAction = playerInputActions.Player.OnMoveRight;
-                bindingIndex = 4;
+                bindingIndex = 0;
                 break;
             case Binding.Confirm:
                 inputAction = playerInputActions.Player.Interact;
