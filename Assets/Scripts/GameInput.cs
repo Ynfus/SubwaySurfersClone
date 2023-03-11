@@ -27,6 +27,8 @@ public class GameInput : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private void Awake()
     {
+        //PlayerPrefs.DeleteKey(PLAYER_PREFS_BINDINGS);
+
         Instance = this;
         playerInputActions = new PlayerInputActions();
 
@@ -87,9 +89,8 @@ public class GameInput : MonoBehaviour
     }
     public void RebindBinding(Binding binding, Action onActionRebound)
     {
-        Debug.Log(Binding.Move_Left);
-        Debug.Log(Binding.Move_Right);
-        Debug.Log(Binding.Pause);
+        Debug.Log(binding);
+
         playerInputActions.Player.Disable();
         InputAction inputAction;
         int bindingIndex;
@@ -99,6 +100,8 @@ public class GameInput : MonoBehaviour
             case Binding.Move_Left:
                 inputAction = playerInputActions.Player.OnMoveLeft;
                 bindingIndex = 0;
+                //Debug.Log("eloelo");
+
                 break;
             case Binding.Move_Right:
                 inputAction = playerInputActions.Player.OnMoveRight;
