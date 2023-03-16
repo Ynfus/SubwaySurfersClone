@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerAnimator playerAnimator;
     public SpawnManager spawnManager;
+    private CapsuleCollider capsuleCollider;
     private PlayerInputActions playerInputActions;
     public static Player Instance;
 
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
+        capsuleCollider= GetComponent<CapsuleCollider>();
         playerInputActions.Enable();
         playerInputActions.Player.OnJump.performed += OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
@@ -346,6 +349,17 @@ public class Player : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = Vector3.zero;
+    }
+    public void ResizeCapsuleCollider()
+    { 
+        capsuleCollider.height= 0.1f;
+        capsuleCollider.center = new Vector3(0, 0.5f, 0);
+    }
+    public void ResizeCapsuleCollider1()
+    {
+        capsuleCollider.height = 2f;
+        capsuleCollider.center = new Vector3(0, 1f, 0);
+
     }
 
 }

@@ -10,7 +10,7 @@ public class PlayerAnimator : MonoBehaviour
     private const string IS_RESIZING = "IsResizing";
     private const string IS_GAMEOVER = "IsGameOver";
     private Animator animator;
-    
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -25,11 +25,18 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void SetIsJumpingFalse()
     {
-            Player.Instance.SetIsJumpingFalse();
+        Player.Instance.SetIsJumpingFalse();
     }
     public void SetIsAnimationJumpingFalse()
     {
         Player.Instance.SetIsAnimationJumpingFalse();
+    }
+    public void DebugSmth()
+    { Player.Instance.ResizeCapsuleCollider(); }
+    public void ResizeBack()
+    {
+        Player.Instance.ResizeCapsuleCollider1();
+
     }
 
 }
