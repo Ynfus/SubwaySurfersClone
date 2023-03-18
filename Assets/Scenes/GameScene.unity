@@ -13254,6 +13254,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Road
       objectReference: {fileID: 0}
+    - target: {fileID: 4648606266986769919, guid: 42934ebc477591540af0cff4398f17c2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8.335437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648606266986769919, guid: 42934ebc477591540af0cff4398f17c2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 100.0872
+      objectReference: {fileID: 0}
     - target: {fileID: 8132346998729521799, guid: 42934ebc477591540af0cff4398f17c2,
         type: 3}
       propertyPath: m_RootOrder
