@@ -58,14 +58,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.31542352
-        functionName: DebugSmth
+        functionName: ResizeCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6851127
-        functionName: ResizeBack
+        functionName: ResizeColliderBack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

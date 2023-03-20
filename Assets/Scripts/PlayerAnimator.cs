@@ -31,9 +31,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         Player.Instance.SetIsAnimationJumpingFalse();
     }
-    public void DebugSmth()
+    public void ResizeCollider()
     { Player.Instance.ResizeCapsuleCollider(); }
-    public void ResizeBack()
+    public void ResizeColliderBack()
     {
         Player.Instance.ResizeCapsuleCollider1();
 
