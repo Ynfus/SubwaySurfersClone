@@ -17,13 +17,14 @@ public class Player : MonoBehaviour
 
 
     private bool isMoving = true;
-    float speed = 5f;
-    float timeToIncreaseSpeed = 1f;
-    float elapsedTime = 0f;
-    bool isJumping = false;
-    bool isAnimationJumping = false;
+    private float speed = 5f;
+    private float timeToIncreaseSpeed = 1f;
+    private float elapsedTime = 0f;
+    private bool isJumping = false;
+    private bool isAnimationJumping = false;
+    private bool isAnimationRolling = false;
     private bool isCollision = false;
-    private bool isResizing = false;
+    private bool isRolling = false;
     private LayerMask itemLayer;
     private LayerMask itemLayer1;
     private LayerMask itemLayerMaskBarrier;
@@ -49,13 +50,12 @@ public class Player : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
-        capsuleCollider= GetComponent<CapsuleCollider>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         playerInputActions.Enable();
         playerInputActions.Player.OnJump.performed += OnJump_performed;
         playerInputActions.Player.OnMoveLeft.performed += OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed += OnMoveRight_performed;
         playerInputActions.Player.OnResizing.performed += OnResizing_performed;
-        playerInputActions.Player.OnResizing.canceled += OnResizing_canceled;
 
     }
     private void OnDestroy()
@@ -64,14 +64,9 @@ public class Player : MonoBehaviour
         playerInputActions.Player.OnMoveLeft.performed -= OnMoveLeft_performed;
         playerInputActions.Player.OnMoveRight.performed -= OnMoveRight_performed;
         playerInputActions.Player.OnResizing.performed -= OnResizing_performed;
-        playerInputActions.Player.OnResizing.canceled -= OnResizing_canceled;
         playerInputActions.Dispose();
     }
 
-    private void OnResizing_canceled(InputAction.CallbackContext obj)
-    {
-        isResizing = false;
-    }
 
 
 
@@ -316,9 +311,17 @@ public class Player : MonoBehaviour
     {
         isJumping = false;
     }
+    public void SetIsRollingFalse()
+    {
+        isRolling = false;
+    }
     public void SetIsAnimationJumpingFalse()
     {
         isAnimationJumping = false;
+    }
+    public void SetIsAnimationRollingFalse()
+    {
+        isAnimationRolling = false;
     }
     public Vector3 GetPosition()
     {
@@ -331,7 +334,13 @@ public class Player : MonoBehaviour
     }
     private void OnResizing_performed(InputAction.CallbackContext obj)
     {
-        isResizing = true;
+        Debug.Log(isRolling + "   " + isAnimationRolling);
+        if (!SubwaySurfersGameManager.Instance.IsGameOver() && /*transform.position.y < 1 &&*/ !isRolling && !isAnimationRolling)
+        {
+            isRolling = true;
+            isAnimationRolling = true;
+
+        }
     }
     public bool IsCollision()
     {
@@ -342,17 +351,17 @@ public class Player : MonoBehaviour
         return isJumping;
 
     }
-    public bool IsResizing()
+    public bool IsRolling()
     {
-        return isResizing;
+        return isRolling;
     }
     public void ResetPosition()
     {
         transform.position = Vector3.zero;
     }
     public void ResizeCapsuleCollider()
-    { 
-        capsuleCollider.height= 0.1f;
+    {
+        capsuleCollider.height = 0.1f;
         capsuleCollider.center = new Vector3(0, 0.5f, 0);
     }
     public void ResizeCapsuleCollider1()

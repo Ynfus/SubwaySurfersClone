@@ -37,7 +37,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 71
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -57,6 +57,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.04968944
+        functionName: SetIsRollingFalse
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.31542352
         functionName: ResizeCollider
         data: 
@@ -66,6 +73,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.6851127
         functionName: ResizeColliderBack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: SetIsAnimationRollingFalse
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

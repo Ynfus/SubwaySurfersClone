@@ -20,7 +20,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator.SetBool(IS_PLAYING, SubwaySurfersGameManager.Instance.IsGamePlaying());
         animator.SetBool(IS_JUMPING, player.IsJumping());
-        animator.SetBool(IS_RESIZING, player.IsResizing());
+        animator.SetBool(IS_RESIZING, player.IsRolling());
         animator.SetBool(IS_GAMEOVER, SubwaySurfersGameManager.Instance.IsGameOver());
     }
     public void SetIsJumpingFalse()
@@ -31,8 +31,18 @@ public class PlayerAnimator : MonoBehaviour
     {
         Player.Instance.SetIsAnimationJumpingFalse();
     }
+    public void SetIsAnimationRollingFalse()
+    {
+        Player.Instance.SetIsAnimationRollingFalse();
+    }
+    public void SetIsRollingFalse()
+    {
+        Player.Instance.SetIsRollingFalse();
+    }
     public void ResizeCollider()
-    { Player.Instance.ResizeCapsuleCollider(); }
+    {
+        Player.Instance.ResizeCapsuleCollider();
+    }
     public void ResizeColliderBack()
     {
         Player.Instance.ResizeCapsuleCollider1();
